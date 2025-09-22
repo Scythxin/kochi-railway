@@ -213,3 +213,142 @@ export const mockInductionDecisions: InductionDecision[] = [
     conflicts: ['Cannot meet EXPRESS-102 requirement']
   }
 ];
+
+// Mock Branding Data
+export const mockBrandingData = [
+  {
+    trainsetId: 'TS001',
+    unitNumber: '801-001',
+    brandingType: 'Premium Express Wrap',
+    requiredHours: 160,
+    actualHours: 142,
+    slaCompliance: 88.75,
+    revenueRisk: 5000,
+    priority: 'high' as const
+  },
+  {
+    trainsetId: 'TS002',
+    unitNumber: '801-002',
+    brandingType: 'Standard Service',
+    requiredHours: 120,
+    actualHours: 118,
+    slaCompliance: 98.3,
+    revenueRisk: 500,
+    priority: 'medium' as const
+  },
+  {
+    trainsetId: 'TS003',
+    unitNumber: '801-003',
+    brandingType: 'City Connect',
+    requiredHours: 140,
+    actualHours: 85,
+    slaCompliance: 60.7,
+    revenueRisk: 8000,
+    priority: 'high' as const
+  }
+];
+
+// Mock Historical Data
+export const mockHistoricalData = [
+  { date: 'Jan', availability: 92, punctuality: 95, mileage: 45000, maintenance: 8 },
+  { date: 'Feb', availability: 89, punctuality: 93, mileage: 48000, maintenance: 12 },
+  { date: 'Mar', availability: 94, punctuality: 96, mileage: 52000, maintenance: 6 },
+  { date: 'Apr', availability: 91, punctuality: 94, mileage: 49000, maintenance: 10 },
+  { date: 'May', availability: 93, punctuality: 97, mileage: 51000, maintenance: 7 },
+  { date: 'Jun', availability: 95, punctuality: 98, mileage: 53000, maintenance: 5 }
+];
+
+// Mock Predictions
+export const mockPredictions = [
+  {
+    component: 'Wheelset Assembly',
+    currentHealth: 68,
+    predictedFailure: 'In 14-21 days',
+    confidence: 85,
+    recommendation: 'Schedule preventive maintenance'
+  },
+  {
+    component: 'HVAC System',
+    currentHealth: 45,
+    predictedFailure: 'In 7-10 days',
+    confidence: 92,
+    recommendation: 'Immediate inspection required'
+  },
+  {
+    component: 'Brake Pads',
+    currentHealth: 82,
+    predictedFailure: 'In 30-45 days',
+    confidence: 78,
+    recommendation: 'Monitor closely'
+  }
+];
+
+// Mock Mileage Data
+export const mockMileageData = [
+  {
+    trainsetId: 'TS001',
+    unitNumber: '801-001',
+    currentMileage: 125000,
+    targetMileage: 120000,
+    deviation: 4.2,
+    componentWear: { wheels: 45, brakes: 38, hvac: 52, motors: 28 }
+  },
+  {
+    trainsetId: 'TS002',
+    unitNumber: '801-002',
+    currentMileage: 118000,
+    targetMileage: 120000,
+    deviation: -1.7,
+    componentWear: { wheels: 35, brakes: 42, hvac: 68, motors: 22 }
+  },
+  {
+    trainsetId: 'TS003',
+    unitNumber: '801-003',
+    currentMileage: 142000,
+    targetMileage: 120000,
+    deviation: 18.3,
+    componentWear: { wheels: 72, brakes: 65, hvac: 78, motors: 55 }
+  }
+];
+
+// Mock Audit Log
+export const mockAuditLog = [
+  {
+    id: '1',
+    timestamp: new Date('2024-01-28T10:30:00'),
+    user: 'john.supervisor',
+    action: 'Manual Override',
+    category: 'override' as const,
+    details: 'Changed TS003 assignment from maintenance to standby',
+    justification: 'Critical service requirement for morning peak',
+    trainsetId: 'TS003'
+  },
+  {
+    id: '2',
+    timestamp: new Date('2024-01-28T09:15:00'),
+    user: 'system',
+    action: 'Automated Induction',
+    category: 'automated' as const,
+    details: 'Generated daily induction plan for 15 trainsets'
+  }
+];
+
+// Mock Simulation Result
+export const mockSimulationResult = {
+  kpiChanges: {
+    availability: 2.3,
+    punctuality: -0.8,
+    mileageBalance: 5.2,
+    brandingCompliance: -3.1
+  },
+  conflicts: [
+    'TS003 exceeds maximum mileage limit by 15%',
+    'Depot A will have insufficient standby units during peak hours',
+    'Branding SLA at risk for Tourist Line Special campaign'
+  ],
+  recommendations: [
+    'Consider rotating TS003 with TS004 to balance mileage',
+    'Schedule TS002 for overnight maintenance to maintain availability',
+    'Prioritize TS003 for revenue service to meet branding requirements'
+  ]
+};
