@@ -10,6 +10,7 @@ import { MaintenanceTracker } from '@/components/MaintenanceTracker';
 import { WhatIfSimulator } from '@/components/WhatIfSimulator';
 import { AuditLog } from '@/components/AuditLog';
 import { MileageBalancer } from '@/components/MileageBalancer';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { 
   mockFleetKPI, 
   mockAlerts, 
@@ -123,6 +124,8 @@ const Index = () => {
               <Button variant="ghost" size="icon">
                 <Settings className="h-5 w-5" />
               </Button>
+              
+              <ThemeToggle />
               
               <Button 
                 variant="outline" 
