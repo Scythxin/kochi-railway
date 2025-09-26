@@ -67,40 +67,40 @@ export function KPICard({
       getVariantStyles(),
       className
     )}>
-      <div className="p-6">
+      <div className="p-3 sm:p-4 md:p-6">
         <div className="flex items-start justify-between">
           <div className="flex-1">
-            <p className="text-sm font-medium text-muted-foreground mb-1">
+            <p className="text-xs sm:text-sm font-medium text-muted-foreground mb-0.5 sm:mb-1 truncate">
               {title}
             </p>
             <div className="flex items-baseline gap-1">
-              <h3 className="text-3xl font-bold text-foreground">
+              <h3 className="text-lg sm:text-2xl md:text-3xl font-bold text-foreground">
                 {value}
               </h3>
               {unit && (
-                <span className="text-lg text-muted-foreground">
+                <span className="text-sm sm:text-base md:text-lg text-muted-foreground">
                   {unit}
                 </span>
               )}
             </div>
             {change !== undefined && (
-              <div className={cn('flex items-center gap-1 mt-2', getTrendColor())}>
+              <div className={cn('flex items-center gap-1 mt-1 sm:mt-2', getTrendColor())}>
                 {getTrendIcon()}
-                <span className="text-sm font-medium">
+                <span className="text-xs sm:text-sm font-medium">
                   {change > 0 ? '+' : ''}{change}%
                 </span>
               </div>
             )}
           </div>
           {icon && (
-            <div className="p-3 rounded-lg bg-primary/10">
+            <div className="p-2 sm:p-3 rounded-lg bg-primary/10 scale-75 sm:scale-90 md:scale-100">
               {icon}
             </div>
           )}
         </div>
       </div>
       <div className="absolute bottom-0 right-0 p-2 opacity-10">
-        <TrendingUp className="w-24 h-24" />
+        <TrendingUp className="w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24" />
       </div>
     </Card>
   );

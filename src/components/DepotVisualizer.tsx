@@ -75,24 +75,24 @@ export function DepotVisualizer({ depots, trainsets, onShunt }: DepotVisualizerP
     <Card className="p-6 bg-gradient-card">
       <div className="space-y-4">
         {/* Header */}
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <div>
-            <h2 className="text-xl font-bold">Depot Visualization</h2>
-            <p className="text-sm text-muted-foreground">
+            <h2 className="text-lg sm:text-xl font-bold">Depot Visualization</h2>
+            <p className="text-xs sm:text-sm text-muted-foreground">
               Interactive stabling layout and shunting management
             </p>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 w-full sm:w-auto">
             {depots.map((depot) => (
               <Button
                 key={depot.id}
                 variant={selectedDepot === depot.id ? 'default' : 'outline'}
                 size="sm"
                 onClick={() => setSelectedDepot(depot.id)}
-                className="gap-2"
+                className="gap-1 sm:gap-2 flex-1 sm:flex-initial"
               >
-                <MapPin className="w-4 h-4" />
-                {depot.name}
+                <MapPin className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span className="text-xs sm:text-sm">{depot.name}</span>
               </Button>
             ))}
           </div>
@@ -136,7 +136,7 @@ export function DepotVisualizer({ depots, trainsets, onShunt }: DepotVisualizerP
                 </div>
               </div>
               
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
                 {stablingGrid.map((position) => {
                   const trainset = depotTrainsets.find(t => t.stablingPosition === position);
                   const status = getPositionStatus(position);

@@ -33,19 +33,19 @@ export function TrainsetCard({ trainset, onClick, selected }: TrainsetCardProps)
   return (
     <Card 
       className={cn(
-        'p-4 cursor-pointer transition-all hover:shadow-lg',
+        'p-3 sm:p-4 cursor-pointer transition-all hover:shadow-lg',
         'border-2',
         selected ? 'border-primary shadow-glow' : 'border-border',
         'bg-gradient-card'
       )}
       onClick={onClick}
     >
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         {/* Header */}
         <div className="flex items-start justify-between">
           <div>
-            <h3 className="font-bold text-lg">{trainset.unitNumber}</h3>
-            <p className="text-sm text-muted-foreground">ID: {trainset.id}</p>
+            <h3 className="font-bold text-base sm:text-lg">{trainset.unitNumber}</h3>
+            <p className="text-xs sm:text-sm text-muted-foreground">ID: {trainset.id}</p>
           </div>
           <StatusBadge status={trainset.status} />
         </div>

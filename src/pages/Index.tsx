@@ -91,38 +91,38 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-40">
-        <div className="container mx-auto px-4 py-3">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon">
+        <div className="container mx-auto px-3 sm:px-4 py-3">
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2 sm:gap-4">
+              <Button variant="ghost" size="icon" className="md:hidden h-8 w-8">
                 <Menu className="h-5 w-5" />
               </Button>
               <div className="flex items-center gap-2">
-                <Train className="h-6 w-6 text-primary" />
-                <h1 className="text-xl font-bold">Rail Fleet Operations</h1>
+                <Train className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
+                <h1 className="text-base sm:text-lg md:text-xl font-bold">Rail Fleet Operations</h1>
               </div>
             </div>
             
-            <div className="flex items-center gap-3">
-              <div className="relative">
+            <div className="flex items-center gap-1 sm:gap-2 md:gap-3">
+              <div className="relative hidden md:block">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
                   placeholder="Search trainsets..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-9 w-64"
+                  className="pl-9 w-48 lg:w-64"
                 />
               </div>
               
-              <Button variant="ghost" size="icon" className="relative">
-                <Bell className="h-5 w-5" />
+              <Button variant="ghost" size="icon" className="relative h-8 w-8 sm:h-9 sm:w-9">
+                <Bell className="h-4 w-4 sm:h-5 sm:w-5" />
                 {criticalAlerts.length > 0 && (
-                  <span className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-status-maintenance animate-pulse" />
+                  <span className="absolute -top-1 -right-1 h-2 w-2 sm:h-3 sm:w-3 rounded-full bg-status-maintenance animate-pulse" />
                 )}
               </Button>
               
-              <Button variant="ghost" size="icon">
-                <Settings className="h-5 w-5" />
+              <Button variant="ghost" size="icon" className="hidden sm:inline-flex h-8 w-8 sm:h-9 sm:w-9">
+                <Settings className="h-4 w-4 sm:h-5 sm:w-5" />
               </Button>
               
               <ThemeToggle />
@@ -131,26 +131,37 @@ const Index = () => {
                 variant="outline" 
                 size="sm"
                 onClick={handleExport}
-                className="gap-2"
+                className="gap-1 sm:gap-2 hidden sm:inline-flex"
               >
                 <Download className="h-4 w-4" />
-                Export
+                <span className="hidden lg:inline">Export</span>
               </Button>
             </div>
+          </div>
+          
+          {/* Mobile search bar */}
+          <div className="relative mt-3 md:hidden">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder="Search trainsets..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-9 w-full"
+            />
           </div>
         </div>
       </header>
 
-      <div className="container mx-auto px-4 py-6">
+      <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-6">
         {/* KPI Dashboard */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4 mb-4 sm:mb-6">
           <KPICard
             title="Fleet Availability"
             value={mockFleetKPI.fleetAvailability}
             unit="%"
             change={2.3}
             trend="up"
-            icon={<CheckCircle className="h-5 w-5 text-status-operational" />}
+            icon={<CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-status-operational" />}
             variant="success"
           />
           <KPICard
@@ -158,7 +169,7 @@ const Index = () => {
             value={`${mockFleetKPI.operational}/${mockFleetKPI.totalTrainsets}`}
             change={-1.2}
             trend="down"
-            icon={<Train className="h-5 w-5 text-primary" />}
+            icon={<Train className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />}
           />
           <KPICard
             title="Punctuality"
@@ -166,7 +177,7 @@ const Index = () => {
             unit="%"
             change={0.8}
             trend="up"
-            icon={<Activity className="h-5 w-5 text-accent" />}
+            icon={<Activity className="h-4 w-4 sm:h-5 sm:w-5 text-accent" />}
             variant="success"
           />
           <KPICard
@@ -174,25 +185,26 @@ const Index = () => {
             value={mockAlerts.length}
             change={15}
             trend="up"
-            icon={<AlertTriangle className="h-5 w-5 text-status-standby" />}
+            icon={<AlertTriangle className="h-4 w-4 sm:h-5 sm:w-5 text-status-standby" />}
             variant={criticalAlerts.length > 0 ? 'danger' : 'warning'}
           />
         </div>
 
         {/* Alerts Section */}
         {(criticalAlerts.length > 0 || warningAlerts.length > 0) && (
-          <div className="mb-6">
-            <div className="flex items-center justify-between mb-3">
-              <h2 className="text-lg font-semibold flex items-center gap-2">
-                <Bell className="h-5 w-5" />
-                Active Alerts
-                <Badge variant="destructive">{mockAlerts.length}</Badge>
+          <div className="mb-4 sm:mb-6">
+            <div className="flex items-center justify-between mb-2 sm:mb-3">
+              <h2 className="text-base sm:text-lg font-semibold flex items-center gap-1 sm:gap-2">
+                <Bell className="h-4 w-4 sm:h-5 sm:w-5" />
+                <span className="hidden sm:inline">Active Alerts</span>
+                <span className="sm:hidden">Alerts</span>
+                <Badge variant="destructive" className="scale-90 sm:scale-100">{mockAlerts.length}</Badge>
               </h2>
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" className="text-xs sm:text-sm">
                 View All
               </Button>
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-3">
               {[...criticalAlerts, ...warningAlerts].slice(0, 4).map((alert) => (
                 <AlertCard 
                   key={alert.id} 
@@ -207,51 +219,60 @@ const Index = () => {
 
         {/* Main Content Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="mb-4 flex-wrap h-auto">
-            <TabsTrigger value="overview" className="gap-2">
-              <BarChart3 className="h-4 w-4" />
-              Overview
-            </TabsTrigger>
-            <TabsTrigger value="induction" className="gap-2">
-              <Activity className="h-4 w-4" />
-              Induction
-            </TabsTrigger>
-            <TabsTrigger value="simulation" className="gap-2">
-              <GitCompare className="h-4 w-4" />
-              Simulation
-            </TabsTrigger>
-            <TabsTrigger value="maintenance" className="gap-2">
-              <Shield className="h-4 w-4" />
-              Maintenance
-            </TabsTrigger>
-            <TabsTrigger value="mileage" className="gap-2">
-              <Gauge className="h-4 w-4" />
-              Mileage
-            </TabsTrigger>
-            <TabsTrigger value="branding" className="gap-2">
-              <Award className="h-4 w-4" />
-              Branding
-            </TabsTrigger>
-            <TabsTrigger value="depot" className="gap-2">
-              <Train className="h-4 w-4" />
-              Depot
-            </TabsTrigger>
-            <TabsTrigger value="fleet" className="gap-2">
-              <Filter className="h-4 w-4" />
-              Fleet
-            </TabsTrigger>
-            <TabsTrigger value="insights" className="gap-2">
-              <TrendingUp className="h-4 w-4" />
-              Insights
-            </TabsTrigger>
-            <TabsTrigger value="audit" className="gap-2">
-              <History className="h-4 w-4" />
-              Audit
-            </TabsTrigger>
-          </TabsList>
+          <ScrollArea className="w-full">
+            <TabsList className="mb-3 sm:mb-4 flex-wrap h-auto justify-start inline-flex w-max">
+              <TabsTrigger value="overview" className="gap-1 sm:gap-2 text-xs sm:text-sm">
+                <BarChart3 className="h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="hidden sm:inline">Overview</span>
+                <span className="sm:hidden">View</span>
+              </TabsTrigger>
+              <TabsTrigger value="induction" className="gap-1 sm:gap-2 text-xs sm:text-sm">
+                <Activity className="h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="hidden sm:inline">Induction</span>
+                <span className="sm:hidden">Induct</span>
+              </TabsTrigger>
+              <TabsTrigger value="simulation" className="gap-1 sm:gap-2 text-xs sm:text-sm">
+                <GitCompare className="h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="hidden sm:inline">Simulation</span>
+                <span className="sm:hidden">Sim</span>
+              </TabsTrigger>
+              <TabsTrigger value="maintenance" className="gap-1 sm:gap-2 text-xs sm:text-sm">
+                <Shield className="h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="hidden sm:inline">Maintenance</span>
+                <span className="sm:hidden">Maint</span>
+              </TabsTrigger>
+              <TabsTrigger value="mileage" className="gap-1 sm:gap-2 text-xs sm:text-sm">
+                <Gauge className="h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="hidden sm:inline">Mileage</span>
+                <span className="sm:hidden">Miles</span>
+              </TabsTrigger>
+              <TabsTrigger value="branding" className="gap-1 sm:gap-2 text-xs sm:text-sm">
+                <Award className="h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="hidden sm:inline">Branding</span>
+                <span className="sm:hidden">Brand</span>
+              </TabsTrigger>
+              <TabsTrigger value="depot" className="gap-1 sm:gap-2 text-xs sm:text-sm">
+                <Train className="h-3 w-3 sm:h-4 sm:w-4" />
+                Depot
+              </TabsTrigger>
+              <TabsTrigger value="fleet" className="gap-1 sm:gap-2 text-xs sm:text-sm">
+                <Filter className="h-3 w-3 sm:h-4 sm:w-4" />
+                Fleet
+              </TabsTrigger>
+              <TabsTrigger value="insights" className="gap-1 sm:gap-2 text-xs sm:text-sm">
+                <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="hidden sm:inline">Insights</span>
+                <span className="sm:hidden">Stats</span>
+              </TabsTrigger>
+              <TabsTrigger value="audit" className="gap-1 sm:gap-2 text-xs sm:text-sm">
+                <History className="h-3 w-3 sm:h-4 sm:w-4" />
+                Audit
+              </TabsTrigger>
+            </TabsList>
+          </ScrollArea>
 
-          <TabsContent value="overview" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <TabsContent value="overview" className="space-y-4 sm:space-y-6">
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6">
               <InductionPlanner
                 decisions={mockInductionDecisions}
                 trainsets={mockTrainsets}
@@ -261,7 +282,7 @@ const Index = () => {
               />
               <MileageBalancer mileageData={mockMileageData} />
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6">
               <MaintenanceTracker
                 certificates={allCertificates}
                 maintenanceJobs={allMaintenanceJobs}
@@ -277,11 +298,11 @@ const Index = () => {
 
           <TabsContent value="induction">
             <div className="space-y-4">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-bold">Fleet Induction Planner</h2>
-                <div className="flex items-center gap-2">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
+                <h2 className="text-lg sm:text-xl font-bold">Fleet Induction Planner</h2>
+                <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
                   <Select value={filterDepot} onValueChange={setFilterDepot}>
-                    <SelectTrigger className="w-32">
+                    <SelectTrigger className="w-full sm:w-32">
                       <SelectValue placeholder="Depot" />
                     </SelectTrigger>
                     <SelectContent>
@@ -292,7 +313,7 @@ const Index = () => {
                     </SelectContent>
                   </Select>
                   <Select value={filterStatus} onValueChange={setFilterStatus}>
-                    <SelectTrigger className="w-32">
+                    <SelectTrigger className="w-full sm:w-32">
                       <SelectValue placeholder="Status" />
                     </SelectTrigger>
                     <SelectContent>
@@ -360,11 +381,11 @@ const Index = () => {
 
           <TabsContent value="fleet">
             <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <h2 className="text-xl font-bold">Fleet Status</h2>
-                <div className="flex items-center gap-2">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <h2 className="text-lg sm:text-xl font-bold">Fleet Status</h2>
+                <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
                   <Select value={filterStatus} onValueChange={setFilterStatus}>
-                    <SelectTrigger className="w-32">
+                    <SelectTrigger className="w-full sm:w-32">
                       <SelectValue placeholder="Status" />
                     </SelectTrigger>
                     <SelectContent>
@@ -375,7 +396,7 @@ const Index = () => {
                     </SelectContent>
                   </Select>
                   <Select value={filterDepot} onValueChange={setFilterDepot}>
-                    <SelectTrigger className="w-32">
+                    <SelectTrigger className="w-full sm:w-32">
                       <SelectValue placeholder="Depot" />
                     </SelectTrigger>
                     <SelectContent>
@@ -388,8 +409,8 @@ const Index = () => {
                 </div>
               </div>
               
-              <ScrollArea className="h-[calc(100vh-400px)]">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <ScrollArea className="h-[60vh] sm:h-[calc(100vh-400px)]">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4">
                   {filteredTrainsets.map((trainset) => (
                     <TrainsetCard
                       key={trainset.id}
